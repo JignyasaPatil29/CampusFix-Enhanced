@@ -1,0 +1,16 @@
+@model Complaint
+@{
+    ViewData["Title"] = "Delete Complaint";
+}
+<h1 class="h2 text-danger">Delete Complaint</h1>
+<div class="alert alert-warning">Are you sure you want to delete this test complaint? This cannot be undone.</div>
+<div class="card mb-3"><div class="card-body">
+<h2 class="h5">@Model.Title</h2>
+<p>@Model.Description</p>
+<p class="mb-0"><strong>Location:</strong> @Model.Location · <strong>Status:</strong> @Model.Status</p>
+</div></div>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete complaint</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>

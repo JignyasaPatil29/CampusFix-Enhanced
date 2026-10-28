@@ -1,0 +1,13 @@
+@model Complaint
+@{
+    ViewData["Title"] = "Report a Problem";
+}
+<h1 class="h2 mb-3">Report a Problem</h1>
+<div class="card"><div class="card-body">
+<form asp-action="Create" method="post">
+    <partial name="_ComplaintForm" model="Model" />
+    <button type="submit" class="btn btn-primary">Submit complaint</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

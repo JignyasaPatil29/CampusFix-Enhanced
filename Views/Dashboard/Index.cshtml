@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    var total = (int?)ViewBag.Total ?? 0;
+    var pending = (int?)ViewBag.Pending ?? 0;
+    var inProgress = (int?)ViewBag.InProgress ?? 0;
+    var resolved = (int?)ViewBag.Resolved ?? 0;
+    var resolvedPercent = total == 0 ? 0 : (int)Math.Round((double)resolved / total * 100);
+}
+<section class="hero-panel reveal">
+    <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR CAMPUS, WELL CARED FOR</div>
+        <h1>Small fixes.<br /><span>Big difference.</span></h1>
+        <p class="hero-description">A better campus starts with being heard. Report maintenance issues, follow progress, and help make your campus a better place for everyone.</p>
+        <div class="hero-actions">
+            <a asp-controller="Complaints" asp-action="Create" class="btn btn-brand btn-lg"><i class="bi bi-plus-circle me-2"></i>Report an issue <i class="bi bi-arrow-up-right ms-2"></i></a>
+            <a asp-controller="Complaints" asp-action="Index" class="btn btn-soft btn-lg">Track complaints <i class="bi bi-arrow-right ms-2"></i></a>
+        </div>
+        <div class="hero-proof"><span class="proof-icon"><i class="bi bi-check2-circle"></i></span><span><strong>Every report matters</strong><small>Help us build a campus that works better.</small></span></div>
+    </div>
+    <div class="hero-visual" role="img" aria-label="Green university campus with modern buildings">
+        <div class="hero-image"></div>
+        <div class="floating-note note-top"><span class="note-icon note-icon-green"><i class="bi bi-lightning-charge-fill"></i></span><span><strong>Make it better</strong><small>One report at a time</small></span></div>
+        <div class="floating-note note-bottom"><span class="note-icon note-icon-purple"><i class="bi bi-stars"></i></span><span><strong>A better campus</strong><small>Starts with you</small></span><span class="note-sparkle">✦</span></div>
+        <div class="visual-orb orb-one"></div><div class="visual-orb orb-two"></div>
+    </div>
+</section>
+
+<section class="section-heading reveal">
+    <div><span class="section-kicker">AT A GLANCE</span><h2>Your campus pulse</h2><p>Here's where things stand right now.</p></div>
+    <a asp-controller="Complaints" asp-action="Index" class="text-link">View all reports <i class="bi bi-arrow-up-right"></i></a>
+</section>
+<section class="row g-3 stats-grid reveal">
+    <div class="col-6 col-xl-3"><article class="stat-card stat-total"><div class="stat-top"><span class="stat-label">Total reports</span><span class="stat-icon"><i class="bi bi-inboxes"></i></span></div><div class="stat-number count-up" data-count="@total">0</div><div class="stat-foot"><span class="stat-dot dot-blue"></span> All reported issues</div><div class="stat-decoration"></div></article></div>
+    <div class="col-6 col-xl-3"><article class="stat-card stat-pending"><div class="stat-top"><span class="stat-label">Pending</span><span class="stat-icon"><i class="bi bi-hourglass-split"></i></span></div><div class="stat-number count-up" data-count="@pending">0</div><div class="stat-foot"><span class="stat-dot dot-amber"></span> Awaiting attention</div><div class="stat-decoration"></div></article></div>
+    <div class="col-6 col-xl-3"><article class="stat-card stat-progress"><div class="stat-top"><span class="stat-label">In progress</span><span class="stat-icon"><i class="bi bi-tools"></i></span></div><div class="stat-number count-up" data-count="@inProgress">0</div><div class="stat-foot"><span class="stat-dot dot-purple"></span> Being worked on</div><div class="stat-decoration"></div></article></div>
+    <div class="col-6 col-xl-3"><article class="stat-card stat-resolved"><div class="stat-top"><span class="stat-label">Resolved</span><span class="stat-icon"><i class="bi bi-check2-circle"></i></span></div><div class="stat-number count-up" data-count="@resolved">0</div><div class="stat-foot"><span class="stat-dot dot-green"></span> Issues taken care of</div><div class="stat-decoration"></div></article></div>
+</section>
+
+<section class="row g-4 mt-2 dashboard-lower reveal">
+    <div class="col-lg-7"><article class="panel-card progress-panel h-100"><div class="panel-heading"><div><span class="section-kicker">THE BIG PICTURE</span><h3>Resolution progress</h3></div><span class="panel-heading-icon"><i class="bi bi-graph-up-arrow"></i></span></div><div class="resolution-layout"><div class="progress-ring" style="--progress:@resolvedPercent"><div class="ring-inner"><strong>@resolvedPercent%</strong><span>resolved</span></div></div><div class="resolution-copy"><h4>Every step counts.</h4><p>Thanks for helping keep the campus safe, comfortable, and ready to learn.</p><div class="mini-legend"><span><i class="legend-dot legend-green"></i> @resolved resolved</span><span><i class="legend-dot legend-amber"></i> @pending pending</span><span><i class="legend-dot legend-purple"></i> @inProgress in progress</span></div></div></div><div class="progress-track"><span style="width:@resolvedPercent%"></span></div><div class="progress-caption"><span>Overall resolution rate</span><strong>@resolvedPercent%</strong></div></article></div>
+    <div class="col-lg-5"><article class="panel-card tips-panel h-100"><div class="tips-image" role="img" aria-label="Sunlight shining on a green campus walkway"></div><div class="tips-content"><span class="section-kicker">A QUICK TIP</span><h3>See something that needs fixing?</h3><p>A clear location and a short description help the campus team get to the issue faster.</p><a asp-controller="Complaints" asp-action="Create" class="text-link">Submit a report <i class="bi bi-arrow-right"></i></a></div></article></div>
+</section>
+<section class="bottom-cta reveal"><div class="cta-icon"><i class="bi bi-chat-square-heart"></i></div><div><h3>Your voice makes a difference.</h3><p>Help improve the spaces where we learn, connect, and grow.</p></div><a asp-controller="Complaints" asp-action="Create" class="btn btn-light cta-button">Report a problem <i class="bi bi-arrow-up-right ms-2"></i></a></section>

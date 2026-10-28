@@ -1,0 +1,15 @@
+@model Complaint
+@{
+    ViewData["Title"] = "Edit Complaint";
+}
+<h1 class="h2 mb-3">Edit Complaint #@Model.Id</h1>
+<div class="card"><div class="card-body">
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="CreatedAt" />
+    <partial name="_ComplaintForm" model="Model" />
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

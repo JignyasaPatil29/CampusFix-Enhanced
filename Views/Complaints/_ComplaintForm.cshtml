@@ -1,0 +1,12 @@
+@model Complaint
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="mb-3"><label asp-for="Title" class="form-label"></label><input asp-for="Title" class="form-control" /><span asp-validation-for="Title" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" class="form-control" rows="4"></textarea><span asp-validation-for="Description" class="text-danger"></span></div>
+<div class="row">
+    <div class="col-md-6 mb-3"><label asp-for="Location" class="form-label"></label><input asp-for="Location" class="form-control" placeholder="e.g. Block A, Room 204" /><span asp-validation-for="Location" class="text-danger"></span></div>
+    <div class="col-md-6 mb-3"><label asp-for="Category" class="form-label"></label><select asp-for="Category" class="form-select">@foreach (string c in (string[])ViewBag.Categories) { <option value="@c">@c</option> }</select></div>
+    <div class="col-md-6 mb-3"><label asp-for="Priority" class="form-label"></label><select asp-for="Priority" class="form-select">@foreach (string p in (string[])ViewBag.Priorities) { <option value="@p">@p</option> }</select></div>
+    <div class="col-md-6 mb-3"><label asp-for="Status" class="form-label"></label><select asp-for="Status" class="form-select">@foreach (string s in (string[])ViewBag.Statuses) { <option value="@s">@s</option> }</select></div>
+    <div class="col-md-6 mb-3"><label asp-for="ReportedBy" class="form-label"></label><input asp-for="ReportedBy" class="form-control" /><span asp-validation-for="ReportedBy" class="text-danger"></span></div>
+    <div class="col-12 mb-3"><label asp-for="ResolutionNotes" class="form-label"></label><textarea asp-for="ResolutionNotes" class="form-control" rows="3"></textarea><span asp-validation-for="ResolutionNotes" class="text-danger"></span></div>
+</div>

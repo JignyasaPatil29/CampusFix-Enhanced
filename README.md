@@ -1,67 +1,91 @@
-# CampusFix — ASP.NET Core MVC + MySQL
+# CampusFix — Campus Maintenance and Complaint Management System
 
-A beginner-friendly campus maintenance complaint tracker demonstrating MVC, EF Core, MySQL, CRUD, model validation, session state, TempData, search/filtering, and a responsive Bootstrap UI.
+CampusFix is a web-based campus maintenance complaint tracker built with ASP.NET Core MVC, C#, Entity Framework Core, and MySQL. It helps users report, track, and manage campus maintenance issues through a responsive dashboard and complaint management interface.
+
+## Features
+
+- Create, view, edit, and delete complaints.
+- Search complaints by title or location.
+- Filter complaints by status and category.
+- Dashboard metrics for total, pending, in-progress, and resolved complaints.
+- Form validation and user-friendly success messages.
+- Responsive Bootstrap interface.
+- Enhanced dashboard design with animations and campus photography.
+- Light/dark theme toggle with reduced-motion accessibility support.
+
+## Technologies Used
+
+- ASP.NET Core MVC
+- C#
+- Entity Framework Core
+- MySQL
+- HTML, CSS, and JavaScript
+- Bootstrap
 
 ## Requirements
-- .NET 8 SDK
-- MySQL Server (and optionally MySQL Workbench)
-- VS Code with C# Dev Kit extension
 
-## 1. Create the database
-In MySQL Workbench, connect to your local MySQL Server and run:
+- .NET 8 SDK
+- MySQL Server
+- MySQL Workbench (optional)
+- VS Code with the C# Dev Kit extension
+
+## Setup Instructions
+
+### 1. Create the database
+
+In MySQL Workbench, connect to your local MySQL server and run:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS campusfix;
 ```
 
-## 2. Set your local connection string securely
-Open a terminal in the folder containing `CampusFix.csproj`:
+### 2. Configure the connection string
 
-```powershell
+Open a terminal in the folder containing `CampusFix.csproj` and run:
+
+```bash
 dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;Port=3306;Database=campusfix;User ID=root;Password=YOUR_MYSQL_PASSWORD;"
 ```
 
-Replace `YOUR_MYSQL_PASSWORD` with the password for your local MySQL account. Do not put the real password in `appsettings.json` or commit it to GitHub. User Secrets are stored outside the project directory and are for local development.
+Replace `YOUR_MYSQL_PASSWORD` with your actual local MySQL password. Keep real credentials out of source control.
 
-## 3. Install EF migration tool
-```powershell
-dotnet tool install --global dotnet-ef --version 8.0.0
-```
-If already installed, use `dotnet tool update --global dotnet-ef --version 8.0.0`.
+If User Secrets has already been initialized for this project, skip `dotnet user-secrets init`.
 
-## 4. Create the tables
-If `InitialCreate` already appears in `dotnet ef migrations list`, do not add it again. Apply the existing migration with `dotnet ef database update`.
-```powershell
+### 3. Restore dependencies
+
+```bash
 dotnet restore
+```
+
+### 4. Apply database migrations
+
+```bash
 dotnet ef migrations list
 dotnet ef database update
 ```
 
-## 5. Run the site
-```powershell
+If `dotnet-ef` is not installed, install the EF Core 8 tool:
+
+```bash
+dotnet tool install --global dotnet-ef --version 8.0.0
+```
+
+### 5. Run the application
+
+```bash
 dotnet run
 ```
-Open the `http://localhost:...` or `https://localhost:...` URL printed in the terminal, then use `/Complaints` to manage records.
 
-## Design refresh
-- Responsive dashboard with animated metrics and resolution progress
-- Campus photography, floating callouts, and smooth entrance animations
-- Interactive complaint filters and action menu
-- Persistent light/dark theme toggle
-- Respects reduced-motion accessibility settings
+Open the local URL printed in the terminal. Visit `/Complaints` to manage complaints.
 
-## Features
-- Complaint create, list, details, edit, delete
-- Required-field and length validation
-- Search by title/location and filter by status/category
-- Dashboard counts for total, pending, in-progress, resolved
-- Session remembers the most recently created complaint ID
-- TempData success messages
-- Responsive Bootstrap layout
+## Security Notes
 
-## GitHub safety
-- Never commit your MySQL password.
-- The real connection string is kept in local .NET User Secrets, not in this repository.
-- Do not commit `bin/`, `obj/`, or personal data.
-- This starter is for local development and does not include authentication or role-based authorization.
+- Never commit your MySQL password or other secrets.
+- Use .NET User Secrets for local development credentials.
+- Do not commit build output such as `bin/` or `obj/`.
+- This starter project does not include authentication or role-based authorization.
+
+## Project Purpose
+
+CampusFix demonstrates the fundamentals of MVC architecture, CRUD operations, database integration, model validation, search and filtering, session state, and responsive web design.
